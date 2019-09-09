@@ -1,0 +1,4 @@
+.git
+.gitignore
+.idea
+docker-compose.override.yml
