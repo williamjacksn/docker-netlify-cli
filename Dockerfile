@@ -4,18 +4,14 @@ ARG NETLIFY_CLI_VERSION="2.14.0"
 
 USER node
 
-ENV NETLIFY_AUTH_TOKEN="" \
-    NODE_ENV="production" \
-    NPM_CONFIG_GLOBAL="true" \
-    NPM_CONFIG_PRODUCTION="true" \
-    NPM_CONFIG_PREFIX="/home/node/.npm-global"
+ENV NETLIFY_AUTH_TOKEN=""
 
-RUN /usr/local/bin/npm install netlify-cli@${NETLIFY_CLI_VERSION} \
- && /usr/local/bin/npm cache clean --force
+RUN /usr/local/bin/yarn global add netlify-cli@${NETLIFY_CLI_VERSION} \
+ && /usr/local/bin/yarn cache clean
 
 WORKDIR /project
 
-ENTRYPOINT ["/home/node/.npm-global/bin/netlify"]
+ENTRYPOINT ["/home/node/.yarn/bin/netlify"]
 
 LABEL org.opencontainers.image.authors="William Jackson <william@subtlecoolness.com>" \
       org.opencontainers.image.version=${NETLIFY_CLI_VERSION}
