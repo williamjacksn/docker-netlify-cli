@@ -1,6 +1,6 @@
 # [Netlify CLI][a] in Docker
 
-This Docker image currently contains the Netlify CLI version **2.14.0**.
+This Docker image currently contains the Netlify CLI version **2.15.0**.
 
 ## To use this image
 
