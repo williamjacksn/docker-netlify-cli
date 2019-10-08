@@ -1,6 +1,6 @@
 FROM node:10.16.3-alpine
 
-ARG NETLIFY_CLI_VERSION="2.15.0"
+ARG NETLIFY_CLI_VERSION="2.16.0"
 
 USER node
 
@@ -14,4 +14,4 @@ WORKDIR /project
 ENTRYPOINT ["/home/node/.yarn/bin/netlify"]
 
 LABEL org.opencontainers.image.authors="William Jackson <william@subtlecoolness.com>" \
-      org.opencontainers.image.version=${NETLIFY_CLI_VERSION}
+      org.opencontainers.image.version="${NETLIFY_CLI_VERSION}"
