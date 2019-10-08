@@ -8,7 +8,8 @@ docker image pull williamjackson/netlify-cli
 
 ## Available tags
 
-*   `latest` &rarr; `2.16.0`
+*   `latest` &rarr; `2.17.0`
+*   `2.16.0`
 *   `2.15.0`
 *   `2.14.0`
 *   `2.13.1`
@@ -23,7 +24,7 @@ location.
 
 Specify the Netlify CLI command after the image name.
 
-```bash
+```sh
 docker container run -it \
     -e NETLIFY_AUTH_TOKEN=<personal_access_token> \
     -v /path/to/project:/project \
