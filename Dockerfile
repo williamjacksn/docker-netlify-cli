@@ -1,6 +1,6 @@
-FROM node:10.16.3-alpine
+FROM node:12.13.0-alpine
 
-ARG NETLIFY_CLI_VERSION="2.19.0"
+ARG NETLIFY_CLI_VERSION="2.19.2"
 
 USER node
 
