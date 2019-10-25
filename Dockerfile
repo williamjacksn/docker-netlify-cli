@@ -1,12 +1,12 @@
 FROM node:12.13.0-alpine
 
-ARG NETLIFY_CLI_VERSION="2.19.2"
+ARG NETLIFY_CLI_VERSION="2.19.3"
 
 USER node
 
 ENV NETLIFY_AUTH_TOKEN=""
 
-RUN /usr/local/bin/yarn global add netlify-cli@${NETLIFY_CLI_VERSION} \
+RUN /usr/local/bin/yarn global add "netlify-cli@${NETLIFY_CLI_VERSION}" \
  && /usr/local/bin/yarn cache clean
 
 WORKDIR /project
