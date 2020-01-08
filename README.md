@@ -10,19 +10,22 @@ docker image pull williamjackson/netlify-cli
 
 ## Available tags
 
-*   `latest` &rarr; `2.26.0`
+*   `latest` &rarr; `2.27.0`
+*   `2.26.0`
 *   `2.25.0`
 *   `2.24.0`
 *   `2.23.1`
-*   `2.22.0`
-*   _(older tags are also available)_
+
+[Older tags are also available][b].
+
+[b]: https://hub.docker.com/r/williamjackson/netlify-cli/tags
 
 ## Usage
 
-In your [Netlify user settings][b], create a personal access token. Set the environment variable `NETLIFY_AUTH_TOKEN`
+In your [Netlify user settings][c], create a personal access token. Set the environment variable `NETLIFY_AUTH_TOKEN`
 inside the container.
 
-[b]: https://app.netlify.com/user/applications
+[c]: https://app.netlify.com/user/applications
 
 The default working directory in the container is `/project`, so mount your project directory into the container at that
 location.
