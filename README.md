@@ -10,11 +10,11 @@ docker image pull williamjackson/netlify-cli
 
 ## Available tags
 
-* `latest` &rarr; `2.30.0`
+* `latest` &rarr; `2.31.0`
+* `2.30.0`
 * `2.29.0`
 * `2.28.0`
 * `2.27.0`
-* `2.26.0`
 
 [Older tags are also available][b].
 
