@@ -12,23 +12,22 @@ jobs:
     steps:
     - name: Check out the repository
       uses: actions/checkout@v1
-    - name: Log in to the registry
+    - name: Log in to the GitHub registry
       run: docker login --password "${{ secrets.GITHUB_TOKEN }}" --username "${GITHUB_ACTOR}" docker.pkg.github.com
-    - name: Set the image base name
-      id: set-image-base-name
-      run: echo ::set-output name=image-base-name::${IMAGE_NAME}
-      env:
-        IMAGE_NAME: netlify-cli:latest
-    - name: Set the container image name
-      id: set-image-name
-      run: echo ::set-output name=image-name::docker.pkg.github.com/${GITHUB_REPOSITORY}/${{ steps.set-image-base-name.outputs.image-base-name }}
-    - name: Build the container image
-      run: docker build --file Dockerfile --tag docker.pkg.github.com/${GITHUB_REPOSITORY}/${{ steps.set-image-base-name.outputs.image-base-name }} .
-    - name: Push the image to the registry
-      run: docker image push docker.pkg.github.com/${GITHUB_REPOSITORY}/${{ steps.set-image-base-name.outputs.image-base-name }}
-    - name: Tag the image for Docker Hub
-      run: docker image tag docker.pkg.github.com/${GITHUB_REPOSITORY}/${{ steps.set-image-base-name.outputs.image-base-name }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.set-image-base-name.outputs.image-base-name }}
     - name: Log in to Docker Hub
       run: docker login --password "${{ secrets.DOCKER_HUB_PASSWORD}}" --username "${{ secrets.DOCKER_HUB_USERNAME }}"
+    - name: Set the image name and tag
+      id: set-image-name
+      run: echo ::set-output name=image-name::netlify-cli:latest
+    - name: Set the full GitHub image name
+      id: set-github-image-name
+      run: echo ::set-output name=image-name::docker.pkg.github.com/${GITHUB_REPOSITORY}/${{ steps.set-image-name.outputs.image-name }}
+    - name: Set the full Docker Hub image name
+      id: set-docker-hub-image-name
+      run: echo ::set-output name=image-name::williamjackson/${{ steps.set-image-name.outputs.image-name }}
+    - name: Build the container image
+      run: docker build --file Dockerfile --tag ${{ steps.set-github-image-name.outputs.image-name }} --tag ${{ steps.set-docker-hub-image-name.outputs.image-name }}  .
+    - name: Push the image to the GitHub registry
+      run: docker image push ${{ steps.set-github-image-name.outputs.image-name }}
     - name: Push the image to Docker Hub
-      run: docker image push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.set-image-base-name.outputs.image-base-name }}
+      run: docker image push ${{ steps.set-docker-hub-image-name.outputs.image-name }}
