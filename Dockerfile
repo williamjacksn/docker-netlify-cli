@@ -1,4 +1,4 @@
-FROM node:12.18.0-alpine3.12
+FROM node:14.4.0-alpine3.12
 
 ARG NETLIFY_CLI_VERSION="2.54.0"
 
