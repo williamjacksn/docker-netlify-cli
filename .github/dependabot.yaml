@@ -5,7 +5,7 @@ updates:
     ignore:
       - dependency-name: node
         versions:
-          - 14.x
+          - 14.4.0-alpine3.12
     schedule:
       interval: daily
   - package-ecosystem: npm
