@@ -2,6 +2,10 @@ version: 2
 updates:
   - package-ecosystem: docker
     directory: /
+    ignore:
+      - dependency-name: node
+        versions:
+          - 14.x
     schedule:
       interval: daily
   - package-ecosystem: npm
