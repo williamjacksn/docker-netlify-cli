@@ -1,0 +1,7 @@
+{
+  "name": "docker-netlify-cli",
+  "version": "1.0.0",
+  "dependencies": {
+    "netlify-cli": "2.54.0"
+  }
+}
