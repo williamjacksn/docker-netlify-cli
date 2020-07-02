@@ -5,8 +5,7 @@ updates:
     ignore:
       - dependency-name: node
         versions:
-          - 14.4.x
-          - 14.5.x
+          - '>=12.x'
     schedule:
       interval: daily
   - package-ecosystem: npm
