@@ -1,4 +1,4 @@
-FROM node:12.19.0-alpine3.12
+FROM node:15.0.1-alpine3.12
 
 USER node
 
