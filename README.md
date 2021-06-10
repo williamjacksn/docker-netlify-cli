@@ -28,6 +28,30 @@ Specify the Netlify CLI command after the image name.
 docker container run -it \
     -e NETLIFY_AUTH_TOKEN=<personal_access_token> \
     -v /path/to/project:/project \
-    williamjackson/netlify-cli \
+    ghcr.io/williamjacksn/netlify-cli \
     deploy
 ```
+
+## Compose
+
+```yaml
+# docker-compose.yaml
+
+services:
+  netlify-cli:
+    image: ghcr.io/williamjacksn/netlify-cli
+    environment:
+      NETLIFY_AUTH_TOKEN: <personal_access_token>
+    volumes:
+      - /path/to/project:/project
+```
+
+```sh
+docker-compose run netlify-cli deploy
+```
+
+### A note on versions
+
+The netlify/cli project publishes new versions multiple times a day, but this image is only updated roughly once a day. If you want to pin a version, and I suggest you do, check the [releases][d] section of this repository to see what versions are available.
+
+[d]: https://github.com/williamjacksn/docker-netlify-cli/releases
