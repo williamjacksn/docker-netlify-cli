@@ -4,6 +4,6 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "netlify-cli": "6.0.6"
+    "netlify-cli": "6.0.8"
   }
 }
