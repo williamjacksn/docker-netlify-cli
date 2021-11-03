@@ -12,6 +12,10 @@ on:
       - published
   workflow_dispatch:
 
+env:
+  ghcr_image_name: ghcr.io/williamjacksn/netlify-cli
+  docker_hub_image_name: williamjackson/netlify-cli
+
 jobs:
 
   build:
@@ -19,31 +23,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Check out the repository
-        uses: actions/checkout@v2.3.5
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1.6.0
 
       - name: Build the container image
-        uses: docker/build-push-action@v1.1.0
+        uses: docker/build-push-action@v2.7.0
         with:
-          repository: netlify-cli
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+          cache-from: |
+            ${{ env.ghcr_image_name }}
+          load: true
+          tags: |
+            ${{ env.ghcr_image_name }}
+            ${{ env.dicker_hub_image_name }}
 
-      - name: Tag and push the image (GitHub)
+      - name: Log in to GitHub container registry
         if: github.event_name == 'push' || github.event_name == 'release'
-        uses: docker/build-push-action@v1.1.0
+        uses: docker/login-action@v1.10.0
         with:
-          repository: ${{ github.repository_owner }}/netlify-cli
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
           password: ${{ github.token }}
-          tag_with_ref: true
-          add_git_labels: true
+          registry: ghcr.io
+          username: ${{ github.actor }}
 
-      - name: Tag and push the image (Docker Hub)
+      - name: Log in to Docker Hub
         if: github.event_name == 'push' || github.event_name == 'release'
-        uses: docker/build-push-action@v1.1.0
+        uses: docker/login-action@v1.10.0
         with:
-          repository: ${{ secrets.docker_hub_username }}/netlify-cli
-          username: ${{ secrets.docker_hub_username }}
           password: ${{ secrets.docker_hub_password }}
-          tag_with_ref: true
-          add_git_labels: true
+          username: ${{ secrets.docker_hub_username }}
+
+      - name: Push latest image to registries
+        if: github.event_name == 'push'
+        run: |
+          docker image push ${{ env.ghcr_image_name }}
+          docker image push ${{ env.docker_hub_image_name }}
+
+      - name: Tag and push release image to registries
+        if: github.event_name == 'release'
+        run: |
+          docker image tag ${{ env.ghcr_image_name }}:latest ${{ env.ghcr_image_name }}:${{ github.event.release.tag_name }}
+          docker image push ${{ env.ghcr_image_name }}:${{ github.event.release.tag_name }}
+          docker image tag ${{ env.docker_hub_image_name }}:latest ${{ env.docker_hub_image_name }}:${{ github.event.release.tag_name }}
+          docker image push ${{ env.docker_hub_image_name }}:${{ github.event.release.tag_name }}
