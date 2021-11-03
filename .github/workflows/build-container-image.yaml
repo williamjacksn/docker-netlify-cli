@@ -36,7 +36,7 @@ jobs:
           load: true
           tags: |
             ${{ env.ghcr_image_name }}
-            ${{ env.dicker_hub_image_name }}
+            ${{ env.docker_hub_image_name }}
 
       - name: Log in to GitHub container registry
         if: github.event_name == 'push' || github.event_name == 'release'
