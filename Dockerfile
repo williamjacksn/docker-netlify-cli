@@ -1,5 +1,7 @@
 FROM node:16.13.0-alpine3.14
 
+RUN /sbin/apk add --no-cache bash
+
 USER node
 
 ENV NETLIFY_AUTH_TOKEN="" \
