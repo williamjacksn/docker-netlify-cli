@@ -1,4 +1,4 @@
-FROM node:16.15.0-alpine3.15
+FROM node:16.15.1-alpine3.15
 
 RUN /sbin/apk add --no-cache bash
 
