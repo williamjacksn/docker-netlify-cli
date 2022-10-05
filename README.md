@@ -35,7 +35,7 @@ docker container run -it \
 ## Compose
 
 ```yaml
-# docker-compose.yaml
+# compose.yaml
 
 services:
   netlify-cli:
@@ -47,11 +47,13 @@ services:
 ```
 
 ```sh
-docker-compose run netlify-cli deploy
+docker compose run netlify-cli deploy
 ```
 
 ### A note on versions
 
-The netlify/cli project publishes new versions multiple times a day, but this image is only updated roughly once a day. If you want to pin a version, and I suggest you do, check the [releases][d] section of this repository to see what versions are available.
+The netlify/cli project publishes new versions multiple times a day, but this image is only updated roughly once a day.
+If you want to pin a version, and I suggest you do, check the [releases][d] section of this repository to see what
+versions are available.
 
 [d]: https://github.com/williamjacksn/docker-netlify-cli/releases
