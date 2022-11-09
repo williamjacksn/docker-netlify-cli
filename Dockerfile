@@ -1,4 +1,4 @@
-FROM node:16.18.0-alpine3.16
+FROM node:19.0.1-alpine3.16
 
 RUN /sbin/apk add --no-cache bash jq
 
