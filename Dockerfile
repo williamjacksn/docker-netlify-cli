@@ -11,6 +11,7 @@ ENV NETLIFY_AUTH_TOKEN="" \
     PATH="/home/node/docker-netlify-cli/node_modules/.bin:${PATH}"
 
 COPY --chown=node:node package.json /home/node/docker-netlify-cli/package.json
+COPY --chown=node:node yarn.lock /home/node/docker-netlify-cli/yarn.lock
 
 WORKDIR /home/node/docker-netlify-cli
 RUN /usr/local/bin/yarn \
