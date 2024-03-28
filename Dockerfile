@@ -2,7 +2,7 @@ FROM node:20
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN /usr/bin/apt-get update \
- && /usr/bin/apt-get install --assume-yes bash jq \
+ && /usr/bin/apt-get install --assume-yes jq \
  && rm -rf /var/lib/apt/lists/*
 
 USER node
