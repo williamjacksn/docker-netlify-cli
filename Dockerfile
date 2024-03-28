@@ -1,6 +1,9 @@
-FROM node:20.11.1-alpine3.19
+FROM node:20
 
-RUN /sbin/apk add --no-cache bash jq
+ARG DEBIAN_FRONTEND=noninteractive
+RUN /usr/bin/apt-get update \
+ && /usr/bin/apt-get install --assume-yes bash jq \
+ && rm -rf /var/lib/apt/lists/*
 
 USER node
 
@@ -8,6 +11,7 @@ ENV NETLIFY_AUTH_TOKEN="" \
     PATH="/home/node/docker-netlify-cli/node_modules/.bin:${PATH}"
 
 COPY --chown=node:node package.json /home/node/docker-netlify-cli/package.json
+COPY --chown=node:node yarn.lock /home/node/docker-netlify-cli/yarn.lock
 
 WORKDIR /home/node/docker-netlify-cli
 RUN /usr/local/bin/yarn \
