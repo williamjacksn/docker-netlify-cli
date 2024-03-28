@@ -14,8 +14,9 @@ COPY --chown=node:node package.json /home/node/docker-netlify-cli/package.json
 COPY --chown=node:node yarn.lock /home/node/docker-netlify-cli/yarn.lock
 
 WORKDIR /home/node/docker-netlify-cli
-RUN /usr/local/bin/yarn \
- && /usr/local/bin/yarn cache clean
+RUN yarn install \
+ && yarn cache clean \
+ && netlify version
 
 WORKDIR /project
 
