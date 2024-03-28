@@ -1,6 +1,9 @@
-FROM node:20.11.1-alpine3.19
+FROM node:20
 
-RUN /sbin/apk add --no-cache bash jq
+ARG DEBIAN_FRONTEND=noninteractive
+RUN /usr/bin/apt-get update \
+ && /usr/bin/apt-get install --assume-yes bash jq \
+ && rm -rf /var/lib/apt/lists/*
 
 USER node
 
