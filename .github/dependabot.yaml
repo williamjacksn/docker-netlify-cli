@@ -4,10 +4,6 @@ updates:
     directory: /
     schedule:
       interval: daily
-    ignore:
-      - dependency-name: node
-        versions:
-          - '>= 21'
   - package-ecosystem: github-actions
     directory: /
     schedule:
