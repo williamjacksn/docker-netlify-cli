@@ -4,6 +4,6 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "netlify-cli": "17.23.1"
+    "netlify-cli": "17.23.3"
   }
 }
