@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> Are you interested in maintaining this project? Open an issue to let me know.
+
 # docker-netlify-cli
 
 A Docker image for [netlify/cli][a].
