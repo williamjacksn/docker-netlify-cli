@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.docker_hub_username }}
 
       - name: Build the container image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -54,7 +54,7 @@ jobs:
 
       - name: Push latest image to registries
         if: github.event_name == 'push'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           cache-from: type=gha
           push: true
@@ -64,7 +64,7 @@ jobs:
 
       - name: Tag and push release image to registries
         if: github.event_name == 'release'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           cache-from: type=gha
           push: true
